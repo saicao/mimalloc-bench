@@ -125,5 +125,6 @@ int main (int argc, char * argv[])
 
   free(threads);
   delete [] w;
+  return 0;
 
 }

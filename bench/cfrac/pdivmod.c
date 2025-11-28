@@ -173,11 +173,11 @@ precision pdivmod(u, v, qp, rp)
       pset(&u, w);
       pdestroy(w);
 
-#ifdef DEBUG
-      printf("m = %d    n = %d\nd = %d\n", m, n, d);
-      printf("norm u = "); pshow(u);
-      printf("norm v = "); pshow(v);
-#endif
+// #ifdef DEBUG
+//       printf("m = %d    n = %d\nd = %d\n", m, n, d);
+//       printf("norm u = "); pshow(u);
+//       printf("norm v = "); pshow(v);
+// #endif
 
       uPtr = u->value + m + 1;		  /* current least significant digit */
       do {

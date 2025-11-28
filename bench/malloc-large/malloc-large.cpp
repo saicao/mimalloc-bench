@@ -5,7 +5,7 @@
 #include <iostream>
 #include <memory>
 
-int main() {
+int main(int argc, char** argv) {
   static constexpr int kNumBuffers = 20;
   static constexpr size_t kMinBufferSize = 5 * 1024 * 1024;
   static constexpr size_t kMaxBufferSize = 25 * 1024 * 1024;

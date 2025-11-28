@@ -13,7 +13,7 @@ void Foo() {
     }
 }
 
-int main() {
+int main(int argc, char** argv) {
     std::vector<std::thread> thrs;
     for (size_t i = 0; i < 1; ++i) {
         thrs.emplace_back(Foo);
