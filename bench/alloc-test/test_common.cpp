@@ -85,7 +85,7 @@ size_t GetMillisecondCount()
 	now = val.QuadPart / frec;
 	
 #else
-#if 1
+#ifndef __ANDROID__
     struct timespec ts;
     timespec_get(&ts, TIME_UTC);//clock get time monotonic
     now = (uint64_t)ts.tv_sec * 1000 + ts.tv_nsec / 1000000; // mks

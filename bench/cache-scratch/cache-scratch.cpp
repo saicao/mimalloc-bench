@@ -115,7 +115,7 @@ int main (int argc, char * argv[])
   }
 
   pthread_t* threads = (pthread_t*)calloc(nthreads,sizeof(pthread_t));
-  pthread_setconcurrency(concurrency);
+  // pthread_setconcurrency(concurrency);
   workerArg * w = new workerArg[nthreads];
 
   int i;
