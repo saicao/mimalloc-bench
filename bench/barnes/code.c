@@ -166,7 +166,9 @@ string argv[];
 	  ((float)(Global->tracktime-Global->partitiontime-
 		   Global->treebuildtime-Global->forcecalctime))/
 	  Global->tracktime);
-   {exit(0);};
+   return 0;
+   // {exit(0);};
+   // printf("")
 }
 
 /*
