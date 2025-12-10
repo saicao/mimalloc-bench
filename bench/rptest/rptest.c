@@ -735,8 +735,13 @@ benchmark_run(int argc, char** argv) {
 		        (unsigned int)thread_count,
 		        (unsigned int)min_size,
 		        (unsigned int)loop_count, (unsigned int)alloc_count, (unsigned int)op_count);
+	
+	printf("\n");
 	fflush(stdout);
-
+	size_t memory_usage_baseline = get_process_memory_usage();
+	size_t memory_usage_peak_baseline = get_process_peak_memory_usage();
+	printf("baseline memory usage: %f MiB, peak: %f MiB\n",
+		   (double)memory_usage_baseline / (1024 * 1024), (double)memory_usage_peak_baseline / (1024 * 1024));
 	size_t memory_usage = 0;
 	size_t cur_memory_usage = 0;
 	size_t sample_allocated = 0;
@@ -868,11 +873,19 @@ benchmark_run(int argc, char** argv) {
 		fwrite(linebuf, (len > 0) ? (size_t)len : 0, 1, fd);
 		fflush(fd);
 	}
+	printf("\n");
 
 	printf("%u memory ops/CPU second (%uMiB peak, %uMiB -> %uMiB bytes sample, %.0f%% overhead)\n",
 		    (unsigned int)average_mops, (unsigned int)(peak_allocated / (1024 * 1024)),
 	        (unsigned int)(sample_allocated / (1024 * 1024)), (unsigned int)(memory_usage / (1024 * 1024)),
 	        100.0 * ((double)memory_usage - (double)sample_allocated) / (double)sample_allocated);
+	
+	printf("adjust (%uMiB peak, %uMiB -> %uMiB bytes sample, %.0f%% overhead)\n",
+		    (unsigned int)((peak_allocated - memory_usage_peak_baseline) / (1024 * 1024)),
+	        (unsigned int)((sample_allocated) / (1024 * 1024)),
+	        (unsigned int)((memory_usage - memory_usage_baseline) / (1024 * 1024)),
+	        100.0 * ((double)(memory_usage - memory_usage_baseline) - (double)sample_allocated) / (double)sample_allocated);
+	
 	fflush(stdout);
 
 	if (fd)
